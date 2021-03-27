@@ -6,12 +6,16 @@ namespace ClinicaVeterinaria
 {
     public class Servico : IServico
     {
+
+        public static List<Servico> servicos;
         public Servico(TimeSpan duracao, string medicamentos, double preco, string nome)
         {
             this.Nome = nome;
             this.Preço = preco;
             this.Medicamentos = medicamentos;
             this.Duração = duracao;
+
+            servicos.Add(this);
         }
 
         public TimeSpan Duração

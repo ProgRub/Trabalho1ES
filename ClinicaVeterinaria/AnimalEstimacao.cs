@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace ClinicaVeterinaria
 {
     public class AnimalEstimacao
     {
-
+        public static List<AnimalEstimacao> animaisEstimacao;
         private static int animalEstimacaoID = 1;
 
         public AnimalEstimacao(string nome, int idade, string especie, Género genero)
@@ -16,6 +17,7 @@ namespace ClinicaVeterinaria
             this.Espécie = especie;
             this.Género = genero;
             this.ID = animalEstimacaoID++;
+            animaisEstimacao.Add(this);
         }
 
         private string Nome

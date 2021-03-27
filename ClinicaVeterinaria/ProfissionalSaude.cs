@@ -6,11 +6,14 @@ namespace ClinicaVeterinaria
 {
     public class ProfissionalSaude : IHumano
     {
+
+        public static List<ProfissionalSaude> profissionaisSaude;
         public ProfissionalSaude(int contacto, string endereco, string nome)
         {
             this.Nome = nome;
             this.Contacto = contacto;
             this.Endereço = endereco;
+            profissionaisSaude.Add(this);
         }
 
         public int Contacto
