@@ -8,14 +8,11 @@ namespace ClinicaVeterinaria
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("CLINICA VETERINÁRIA");
             while (true)
             {
+                Console.Clear();
+                Console.WriteLine("CLINICA VETERINÁRIA");
                 Menu();
-                foreach(AnimalEstimacao animal in AnimalEstimacao.animaisEstimacao)
-                {
-                    Console.WriteLine(animal.Nome);
-                }
             }
         }
 
