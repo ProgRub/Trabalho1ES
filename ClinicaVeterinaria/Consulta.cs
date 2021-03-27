@@ -4,16 +4,17 @@ using System.Text;
 
 namespace ClinicaVeterinaria
 {
-    public class ProfissionalSaude : IHumano
+    public class Servico : IServico
     {
-        public ProfissionalSaude(int contacto, string endereco, string nome)
+        public Servico(TimeSpan duracao, string medicamentos, double preco, string nome)
         {
             this.Nome = nome;
-            this.Contacto = contacto;
-            this.Endereço = endereco;
+            this.Preço = preco;
+            this.Medicamentos = medicamentos;
+            this.Duração = duracao;
         }
 
-        public int Contacto
+        public TimeSpan Duração
         {
             get => default;
             set
@@ -21,7 +22,15 @@ namespace ClinicaVeterinaria
             }
         }
 
-        public string Endereço
+        public string Medicamentos
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public double Preço
         {
             get => default;
             set

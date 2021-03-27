@@ -1,27 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ClinicaVeterinaria.Cliente">
-    <Position X="6.75" Y="3.5" Width="1.5" />
+    <Position X="8" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAEEAAAA=</HashCode>
       <FileName>Cliente.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ClinicaVeterinaria.ProfissionalSaude">
-    <Position X="4.25" Y="3.5" Width="1.5" />
+    <Position X="6.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAEEAAAA=</HashCode>
       <FileName>ProfissionalSaude.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="ClinicaVeterinaria.IHumano">
-    <Position X="5.25" Y="1.75" Width="1.5" />
+  <Class Name="ClinicaVeterinaria.AnimalEstimacao">
+    <Position X="11.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAgAEAAAACAAgAAAAAAAEAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>AnimalEstimacao.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClinicaVeterinaria.Servico">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAg=</HashCode>
+      <FileName>Consulta.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="ClinicaVeterinaria.IHumano">
+    <Position X="7" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAEEAAAA=</HashCode>
       <FileName>IHumano.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Interface Name="ClinicaVeterinaria.IServico">
+    <Position X="3.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAg=</HashCode>
+      <FileName>IServico.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ClinicaVeterinaria.Género">
+    <Position X="11.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Género.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
