@@ -114,6 +114,16 @@ namespace ClinicaVeterinaria
                 Console.Write("Insira o endereço e-mail do cliente: ");
                 endereco = Console.ReadLine();
             }
+
+            Console.Write("Insira o número telefónico do cliente (não pode conter letras e deve ter 9 dígitos): ");
+            string stringContato = Console.ReadLine();
+            while (!int.TryParse(stringContato, out contato) || stringContato.Length!=9)
+            {
+                Console.Write("Insira o número telefónico do cliente (não pode conter letras e deve ter 9 dígitos): ");
+                stringContato = Console.ReadLine();
+            }
+
+            new Cliente(contato, endereco, nome);
         }
 
         static void RegistarProfissional()

@@ -7,7 +7,7 @@ namespace ClinicaVeterinaria
     public class ProfissionalSaude : IHumano
     {
 
-        public static List<ProfissionalSaude> profissionaisSaude;
+        public static List<ProfissionalSaude> profissionaisSaude=new List<ProfissionalSaude>();
         private int _contacto;
         private string _endereco;
         private string _nome;

@@ -7,7 +7,7 @@ namespace ClinicaVeterinaria
     public class Servico : IServico
     {
 
-        public static List<Servico> servicos;
+        public static List<Servico> servicos=new List<Servico>();
         private TimeSpan _duracao;
         private string _medicamentos;
         private string _nome;
