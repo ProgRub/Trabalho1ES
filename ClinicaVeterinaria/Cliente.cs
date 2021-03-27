@@ -7,7 +7,7 @@ namespace ClinicaVeterinaria
     public class Cliente : IHumano
     {
 
-        public static List<Cliente> clientes;
+        public static List<Cliente> clientes=new List<Cliente>();
         private int _contacto;
         private string _endereco;
         private string _nome;
