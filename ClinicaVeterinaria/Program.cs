@@ -8,5 +8,22 @@ namespace ClinicaVeterinaria
         {
             Console.WriteLine("Hello World!");
         }
+
+        static void Menu()
+        {
+            Console.Write("");
+        }
+
+        static void RegistarAnimal()
+        {
+
+        }
+
+        static void RegistarCliente() { }
+
+        static void RegistarProfissional()
+        {
+
+        }
     }
 }
