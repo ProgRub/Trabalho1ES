@@ -7,55 +7,59 @@ namespace ClinicaVeterinaria
 {
     public class AnimalEstimacao
     {
-        public static List<AnimalEstimacao> animaisEstimacao;
+        public static List<AnimalEstimacao> animaisEstimacao = new List<AnimalEstimacao>();
         private static int animalEstimacaoID = 1;
+
+        private string _nome, _especie;
+        private int _idade, _ID;
+        private Género _genero;
 
         public AnimalEstimacao(string nome, int idade, string especie, Género genero)
         {
-            this.Nome = nome;
-            this.Idade = idade;
-            this.Espécie = especie;
-            this.Género = genero;
-            this.ID = animalEstimacaoID++;
+            this._nome = nome;
+            this._idade = idade;
+            this._especie = especie;
+            this._genero = genero;
+            this._ID = animalEstimacaoID++;
             animaisEstimacao.Add(this);
         }
 
-        private string Nome
+        public string Nome
         {
-            get => default;
-            set
+            get => _nome;
+            private set
             {
             }
         }
 
-        private int Idade
+        public int Idade
         {
-            get => default;
-            set
+            get => _idade;
+            private set
             {
             }
         }
 
-        private string Espécie
+        public string Espécie
         {
-            get => default;
-            set
+            get => _especie;
+            private set
             {
             }
         }
 
-        private int ID
+        public int ID
         {
-            get => default;
-            set
+            get => _ID;
+            private set
             {
             }
         }
 
         public Género Género
         {
-            get => default;
-            set
+            get => _genero;
+            private set
             {
             }
         }

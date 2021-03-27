@@ -8,19 +8,24 @@ namespace ClinicaVeterinaria
     {
 
         public static List<Servico> servicos;
+        private TimeSpan _duracao;
+        private string _medicamentos;
+        private string _nome;
+        private double _preco;
+
         public Servico(TimeSpan duracao, string medicamentos, double preco, string nome)
         {
-            this.Nome = nome;
-            this.Preço = preco;
-            this.Medicamentos = medicamentos;
-            this.Duração = duracao;
+            this._nome = nome;
+            this._preco = preco;
+            this._medicamentos = medicamentos;
+            this._duracao = duracao;
 
             servicos.Add(this);
         }
 
         public TimeSpan Duração
         {
-            get => default;
+            get => _duracao;
             set
             {
             }
@@ -28,7 +33,7 @@ namespace ClinicaVeterinaria
 
         public string Medicamentos
         {
-            get => default;
+            get => _medicamentos;
             set
             {
             }
@@ -36,7 +41,7 @@ namespace ClinicaVeterinaria
 
         public double Preço
         {
-            get => default;
+            get => _preco;
             set
             {
             }
@@ -44,7 +49,7 @@ namespace ClinicaVeterinaria
 
         public string Nome
         {
-            get => default;
+            get => _nome;
             set
             {
             }

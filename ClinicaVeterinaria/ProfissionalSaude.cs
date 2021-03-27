@@ -8,17 +8,21 @@ namespace ClinicaVeterinaria
     {
 
         public static List<ProfissionalSaude> profissionaisSaude;
+        private int _contacto;
+        private string _endereco;
+        private string _nome;
+
         public ProfissionalSaude(int contacto, string endereco, string nome)
         {
-            this.Nome = nome;
-            this.Contacto = contacto;
-            this.Endereço = endereco;
+            this._nome = nome;
+            this._contacto = contacto;
+            this._endereco = endereco;
             profissionaisSaude.Add(this);
         }
 
         public int Contacto
         {
-            get => default;
+            get => _contacto;
             set
             {
             }
@@ -26,7 +30,7 @@ namespace ClinicaVeterinaria
 
         public string Endereço
         {
-            get => default;
+            get => _endereco;
             set
             {
             }
@@ -34,7 +38,7 @@ namespace ClinicaVeterinaria
 
         public string Nome
         {
-            get => default;
+            get => _nome;
             set
             {
             }

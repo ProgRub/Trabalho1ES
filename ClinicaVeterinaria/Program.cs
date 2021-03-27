@@ -12,6 +12,10 @@ namespace ClinicaVeterinaria
             while (true)
             {
                 Menu();
+                foreach(AnimalEstimacao animal in AnimalEstimacao.animaisEstimacao)
+                {
+                    Console.WriteLine(animal.Nome);
+                }
             }
         }
 
@@ -20,8 +24,8 @@ namespace ClinicaVeterinaria
             Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Registar Profissional de Saúde");
             Console.Write("Opção: ");
             string input = Console.ReadLine();
-            int opcao=0;
-            while (!int.TryParse(input, out opcao) && (opcao<0 || opcao>3))
+            int opcao = 0;
+            while (!int.TryParse(input, out opcao) && (opcao < 0 || opcao > 3))
             {
                 Console.WriteLine("OPÇÃO INVÁLIDA!");
                 Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Registar Profissional de Saúde");
@@ -94,7 +98,6 @@ namespace ClinicaVeterinaria
         }
 
         static void RegistarCliente() {
-
             Console.WriteLine("REGISTAR CLIENTE:");
             string nome = "1";
             string endereco = "1";
