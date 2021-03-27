@@ -11,12 +11,14 @@ namespace ClinicaVeterinaria
         private int _contacto;
         private string _endereco;
         private string _nome;
+        private List<AnimalEstimacao> _animaisEstimacao;
 
         public Cliente(int contacto, string endereco, string nome)
         {
             this._nome = nome;
             this._contacto = contacto;
             this._endereco = endereco;
+            this._animaisEstimacao = new List<AnimalEstimacao>();
             clientes.Add(this);
         }
 
@@ -39,6 +41,14 @@ namespace ClinicaVeterinaria
         public string Nome
         {
             get => _nome;
+            set
+            {
+            }
+        }
+
+        public List<AnimalEstimacao> AnimaisEstimacao
+        {
+            get => _animaisEstimacao;
             set
             {
             }

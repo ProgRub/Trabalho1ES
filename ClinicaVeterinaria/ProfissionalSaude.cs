@@ -12,6 +12,7 @@ namespace ClinicaVeterinaria
         private string _endereco;
         private string _nome;
 
+
         public ProfissionalSaude(int contacto, string endereco, string nome)
         {
             this._nome = nome;
