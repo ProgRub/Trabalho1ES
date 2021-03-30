@@ -18,14 +18,15 @@ namespace ClinicaVeterinaria
 
         static void Menu()
         {
-            Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Registar Profissional de Saúde");
+            Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço");
             Console.Write("Opção: ");
             string input = Console.ReadLine();
             int opcao = 0;
+
             while (!int.TryParse(input, out opcao) && (opcao < 0 || opcao > 3))
             {
                 Console.WriteLine("OPÇÃO INVÁLIDA!");
-                Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Registar Profissional de Saúde");
+                Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço");
                 Console.Write("Opção: ");
                 input = Console.ReadLine();
             }
@@ -38,7 +39,7 @@ namespace ClinicaVeterinaria
                     RegistarCliente();
                     break;
                 case 3:
-                    RegistarProfissional();
+                    criarServiço();
                     break;
             }
         }
@@ -124,12 +125,45 @@ namespace ClinicaVeterinaria
             }
 
 
-            new Cliente(contato, endereco, nome);
+            //new Cliente(contato, endereco, nome);
         }
 
-        static void RegistarProfissional()
+        static void criarServiço()
         {
+            Console.WriteLine("CRIAR SERVIÇO:");
+            string nome = "1";
+            string medicamentos = "1";
 
+            while (nome.All(char.IsDigit))
+            {
+                Console.Write("Insira o nome do cliente (não pode conter dígitos): ");
+                nome = Console.ReadLine();
+            }
+
+            Console.Write("Insira o nome dos medicamentos (caso existam):");
+            medicamentos = Console.ReadLine();
+
+            Console.Write("Insira o preço:");
+            string stringPreço = Console.ReadLine();
+            double preço;
+            while (!double.TryParse(stringPreço, out preço))
+            {
+                Console.Write("Insira o preço:");
+                stringPreço = Console.ReadLine();
+            }
+
+            Console.Write("Insira a duração (em minutos):");
+            string stringDuração = Console.ReadLine();
+            int duração;
+            while (!int.TryParse(stringDuração, out duração))
+            {
+                Console.Write("Insira a duração (em minutos):");
+                stringPreço = Console.ReadLine();
+            }
+
+            new Servico(new TimeSpan(0, duração, 0), medicamentos, preço, nome);
+
+            
         }
     }
 }
