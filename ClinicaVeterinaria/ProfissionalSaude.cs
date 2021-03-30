@@ -48,5 +48,13 @@ namespace ClinicaVeterinaria
             {
             }
         }
+
+        public int Id
+        {
+            get => _ID;
+            set
+            {
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ namespace ClinicaVeterinaria
 {
     public class Consulta
     {
+        public static List<Consulta> consultas = new List<Consulta>();
         private Servico _servico;
         private ProfissionalSaude _profissionalSaude;
         private AnimalEstimacao _animalEstimacao;
@@ -17,6 +18,8 @@ namespace ClinicaVeterinaria
             this._profissionalSaude = profissionalSaude;
             this._animalEstimacao = animalEstimacao;
             this._periodo = periodo;
+
+            consultas.Add(this);
         }
 
         public Servico Servico
@@ -50,5 +53,9 @@ namespace ClinicaVeterinaria
             {
             }
         }
+
+        
+
+
     }
 }

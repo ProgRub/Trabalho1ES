@@ -49,6 +49,14 @@ namespace ClinicaVeterinaria
             }
         }
 
+        public int Id
+        {
+            get => _ID;
+            set
+            {
+            }
+        }
+
         public List<int> AnimaisEstimacao
         {
             get => _animaisEstimacao;

@@ -128,6 +128,13 @@ namespace ClinicaVeterinaria
             }
 
             Console.WriteLine("Insira os números dos animais de estimação que quer associar a este cliente separados por vírgulas.");
+
+            if (AnimalEstimacao.animaisEstimacao.Count() == 0)
+            {
+                Console.WriteLine("Nenhum animal de estimação registado.");
+                return;
+            }
+
             foreach (AnimalEstimacao animal in AnimalEstimacao.animaisEstimacao)
             {
                 Console.WriteLine($"{animal.ID}. {animal.Nome}, {animal.Espécie}, {animal.Idade}, {animal.Género}");
@@ -191,6 +198,138 @@ namespace ClinicaVeterinaria
             new Servico(new TimeSpan(0, duração, 0), medicamentos, preço, nome);
 
             
+        }
+
+        public void MarcarConsulta()
+        {
+            Console.WriteLine("MARCAR CONSULTA:");
+
+            //Escolher cliente
+            if (Cliente.clientes.Count() == 0)
+            {
+                Console.WriteLine("Nenhum cliente registado.");
+                return;
+            }
+
+            Console.WriteLine("Lista de Clientes:");
+            foreach (Cliente cliente in Cliente.clientes)
+            {
+                Console.WriteLine($"{cliente.Id} - {cliente.Nome}");
+            }
+            Console.WriteLine("Insira o ID do cliente:");
+            string stringIdCliente = Console.ReadLine();
+            int idCliente;
+            while (!int.TryParse(stringIdCliente, out idCliente))
+            {
+                Console.WriteLine("Insira o ID do cliente:");
+                stringIdCliente = Console.ReadLine();
+            }
+
+            var animaisEstimacaoCliente = AnimalEstimacao.animaisEstimacao.Where(animal => Cliente.clientes[idCliente].AnimaisEstimacao.Contains(animal.ID));
+            if (animaisEstimacaoCliente.Count() == 0)
+            {
+                Console.WriteLine("O cliente não tem animais de estimação.");
+                return;
+            }
+
+
+            //Escolher serviço:
+            Console.WriteLine("Serviços:");
+            if(Servico.servicos.Count() == 0)
+            {
+                Console.WriteLine("Nenhum serviço criado.");
+                return;
+            }
+
+            foreach(Servico service in Servico.servicos)
+            {
+                Console.WriteLine($"{service.Id} - {service.Nome} ({service.Preço})");
+            }
+
+            Console.Write("Escolha o tipo de Serviço: ");
+            string stringServiçoEscolhido = Console.ReadLine();
+            int serviçoEscolhido; //TIPO SERVIÇO
+            while (!int.TryParse(stringServiçoEscolhido, out serviçoEscolhido))
+            {
+                Console.WriteLine("Escolha o tipo de Serviço:");
+                stringServiçoEscolhido = Console.ReadLine();
+            }
+
+
+            bool profissionaisDisponiveis = false;
+            while (!profissionaisDisponiveis)
+            {
+                //Escolher dia semana:
+                string stringDiaSemana = "1";
+                Console.Write("Escolha o dia da semana: ");
+                int indexDia = 1;
+                foreach (DiaSemana dia in Enum.GetValues(typeof(DiaSemana)))
+                {
+                    Console.WriteLine($"{indexDia} - {dia}");
+                }
+
+                int indexDiaEscolhido;
+                while (!int.TryParse(stringDiaSemana, out indexDiaEscolhido))
+                {
+                    Console.WriteLine("Escolha o dia da semana:");
+                    stringDiaSemana = Console.ReadLine();
+                }
+
+                DiaSemana diaSemanaEscolhido = (DiaSemana)(indexDiaEscolhido - 1); //DIASEMANA ESCOLHIDO
+
+                //Escolher horário:
+                Console.WriteLine("Escolha o horário da consulta: ");
+                Console.Write("Horas: ");
+                string stringHora = Console.ReadLine();
+                int horaEscolhida;
+                while (!int.TryParse(stringHora, out horaEscolhida))
+                {
+                    Console.Write("Horas:");
+                    stringHora = Console.ReadLine();
+                }
+
+                Console.Write("Minutos: ");
+                string stringMinutos = Console.ReadLine();
+                int minutosEscolhidos;
+                while (!int.TryParse(stringMinutos, out minutosEscolhidos))
+                {
+                    Console.Write("Minutos: ");
+                    stringHora = Console.ReadLine();
+                }
+                
+
+                //Escolher profissional disponível: (FALTA)
+                foreach (ProfissionalSaude profissional in ProfissionalSaude.profissionaisSaude)
+                {
+                    Console.WriteLine($"{profissional.Id} - {profissional.Nome}");
+                    profissionaisDisponiveis = true;
+                }
+
+                if (!profissionaisDisponiveis)
+                {
+                    Console.WriteLine("Não há profissionais de saúde disponíveis nesse horário.");
+                }
+
+            }
+            
+            //Escolher animal de estimação:
+            Console.WriteLine("Escolha o animal de estimação:");
+            foreach (AnimalEstimacao animal in animaisEstimacaoCliente)
+            {
+                Console.WriteLine($"{animal.ID}. {animal.Nome}, {animal.Espécie}, {animal.Idade}, {animal.Género}");
+            }
+
+            Console.WriteLine("Insira o ID do animal:");
+            string stringIdAnimal = Console.ReadLine();
+            int idAnimal; //ID DO ANIMAL
+            while (!int.TryParse(stringIdAnimal, out idAnimal))
+            {
+                Console.WriteLine("Insira o ID do animal:");
+                stringIdAnimal = Console.ReadLine();
+            }
+
+
+
         }
     }
 }

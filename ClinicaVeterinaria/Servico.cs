@@ -8,12 +8,12 @@ namespace ClinicaVeterinaria
     {
 
         public static List<Servico> servicos=new List<Servico>();
-        private static int ContadorID = 1;
         private TimeSpan _duracao;
         private string _medicamentos;
         private string _nome;
         private double _preco;
-        private int ID;
+        private int _ID;
+        private static int ID = 1;
 
         public Servico(TimeSpan duracao, string medicamentos, double preco, string nome)
         {
@@ -21,7 +21,8 @@ namespace ClinicaVeterinaria
             this._preco = preco;
             this._medicamentos = medicamentos;
             this._duracao = duracao;
-            this.ID = ContadorID++;
+            this._ID = ID++;
+
             servicos.Add(this);
         }
 
@@ -52,6 +53,13 @@ namespace ClinicaVeterinaria
         public string Nome
         {
             get => _nome;
+            set
+            {
+            }
+        }
+        public int Id
+        {
+            get => _ID;
             set
             {
             }
