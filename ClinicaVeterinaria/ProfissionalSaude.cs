@@ -12,16 +12,16 @@ namespace ClinicaVeterinaria
         private int _contacto, _ID;
         private string _endereco;
         private string _nome;
-        private Período _periodoDisponibilidade;
+        private List<Período> _periodosDisponibilidade;
 
 
-        public ProfissionalSaude(int contacto, string endereco, string nome, Período periodoDisponibilidade)
+        public ProfissionalSaude(int contacto, string endereco, string nome, List<Período> periodosDisponibilidade)
         {
             this._nome = nome;
             this._contacto = contacto;
             this._endereco = endereco;
             this._ID = ContadorID++;
-            this._periodoDisponibilidade = periodoDisponibilidade;
+            this._periodosDisponibilidade = periodosDisponibilidade;
             profissionaisSaude.Add(this);
         }
 
