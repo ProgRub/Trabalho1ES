@@ -9,9 +9,17 @@ namespace ClinicaVeterinaria
     {
         static void Main(string[] args)
         {
+            new ProfissionalSaude(999999999, "aaa@gmail.com", "Rúben");
+            new ProfissionalSaude(888888888, "bbb@gmail.com", "Diego");
+            new ProfissionalSaude(777777777, "ccc@gmail.com", "Maria");
+            foreach (Período periodo in ProfissionalSaude.profissionaisSaude.Last().PeriodosDisponibilidade)
+            {
+                Console.WriteLine(periodo.Dia + " " + periodo.Início + " " + periodo.Fim);
+                Console.WriteLine(periodo.Fim - periodo.Início);
+            }
             while (true)
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine("CLINICA VETERINÁRIA");
                 Menu();
             }
@@ -188,7 +196,7 @@ namespace ClinicaVeterinaria
                 stringPreço = Console.ReadLine();
             }
 
-            new Servico(new TimeSpan(0, duração, 0), medicamentos, preço, nome);
+            new Servico(new TimeSpan((int)(duração/60), duração%60, 0), medicamentos, preço, nome);
 
             
         }
