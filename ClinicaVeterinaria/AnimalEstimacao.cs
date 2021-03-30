@@ -8,7 +8,7 @@ namespace ClinicaVeterinaria
     public class AnimalEstimacao
     {
         public static List<AnimalEstimacao> animaisEstimacao = new List<AnimalEstimacao>();
-        private static int animalEstimacaoID = 1;
+        private static int contadorID = 1;
 
         private string _nome, _especie;
         private int _idade, _ID;
@@ -20,7 +20,7 @@ namespace ClinicaVeterinaria
             this._idade = idade;
             this._especie = especie;
             this._genero = genero;
-            this._ID = animalEstimacaoID++;
+            this._ID = contadorID++;
             animaisEstimacao.Add(this);
         }
 
