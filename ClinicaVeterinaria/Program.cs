@@ -33,7 +33,7 @@ namespace ClinicaVeterinaria
 
         static void Menu()
         {
-            Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço");
+            Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço\n4: Marcar Consulta");
             Console.Write("Opção: ");
             string input = Console.ReadLine();
             int opcao = 0;
@@ -41,7 +41,7 @@ namespace ClinicaVeterinaria
             while (!int.TryParse(input, out opcao) && (opcao < 0 || opcao > 3))
             {
                 Console.WriteLine("OPÇÃO INVÁLIDA!");
-                Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço");
+                Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço\n4: Marcar Consulta");
                 Console.Write("Opção: ");
                 input = Console.ReadLine();
             }
@@ -55,6 +55,9 @@ namespace ClinicaVeterinaria
                     break;
                 case 3:
                     criarServiço();
+                    break;
+                case 4:
+                    MarcarConsulta();
                     break;
             }
         }
@@ -151,7 +154,7 @@ namespace ClinicaVeterinaria
 
             foreach (AnimalEstimacao animal in AnimalEstimacao.animaisEstimacao)
             {
-                Console.WriteLine($"{animal.ID}. {animal.Nome}, {animal.Espécie}, {animal.Idade}, {animal.Género}");
+                Console.WriteLine($"{animal.ID}. {animal.Nome}, {animal.Espécie}, {animal.Idade} anos, {animal.Género}");
             }
             Console.Write("Resposta:");
             string animais = Console.ReadLine();
@@ -191,12 +194,12 @@ namespace ClinicaVeterinaria
             Console.Write("Insira o nome dos medicamentos (caso existam):");
             medicamentos = Console.ReadLine();
 
-            Console.Write("Insira o preço:");
+            Console.Write("Insira o preço(€):");
             string stringPreço = Console.ReadLine();
             double preço;
             while (!double.TryParse(stringPreço, out preço))
             {
-                Console.Write("Insira o preço:");
+                Console.Write("Insira o preço(€):");
                 stringPreço = Console.ReadLine();
             }
 
@@ -214,7 +217,7 @@ namespace ClinicaVeterinaria
             
         }
 
-        public void MarcarConsulta()
+        static void MarcarConsulta()
         {
             Console.WriteLine("MARCAR CONSULTA:");
 
@@ -230,7 +233,7 @@ namespace ClinicaVeterinaria
             {
                 Console.WriteLine($"{cliente.Id} - {cliente.Nome}");
             }
-            Console.WriteLine("Insira o ID do cliente:");
+            Console.Write("Insira o ID do cliente:");
             string stringIdCliente = Console.ReadLine();
             int idCliente;
             while (!int.TryParse(stringIdCliente, out idCliente))
@@ -239,7 +242,7 @@ namespace ClinicaVeterinaria
                 stringIdCliente = Console.ReadLine();
             }
 
-            var animaisEstimacaoCliente = AnimalEstimacao.animaisEstimacao.Where(animal => Cliente.clientes[idCliente].AnimaisEstimacao.Contains(animal.ID));
+            var animaisEstimacaoCliente = AnimalEstimacao.animaisEstimacao.Where(animal => Cliente.clientes[idCliente-1].AnimaisEstimacao.Contains(animal.ID)).ToList();
             if (animaisEstimacaoCliente.Count() == 0)
             {
                 Console.WriteLine("O cliente não tem animais de estimação.");
@@ -257,7 +260,7 @@ namespace ClinicaVeterinaria
 
             foreach(Servico service in Servico.servicos)
             {
-                Console.WriteLine($"{service.Id} - {service.Nome} ({service.Preço})");
+                Console.WriteLine($"{service.Id} - {service.Nome} ({service.Preço}€)");
             }
 
             Console.Write("Escolha o tipo de Serviço: ");
@@ -269,23 +272,28 @@ namespace ClinicaVeterinaria
                 stringServiçoEscolhido = Console.ReadLine();
             }
 
+            Período periodoEscolhido = null;
 
-            bool profissionaisDisponiveis = false;
-            while (!profissionaisDisponiveis)
+            bool HáProfissionaisDisponiveis = false;
+            List<ProfissionalSaude> profissionaisDisponiveis = null;
+            while (!HáProfissionaisDisponiveis)
             {
                 //Escolher dia semana:
                 string stringDiaSemana = "1";
-                Console.Write("Escolha o dia da semana: ");
+                Console.WriteLine("Escolha o dia da semana: ");
                 int indexDia = 1;
-                foreach (DiaSemana dia in Enum.GetValues(typeof(DiaSemana)))
+                foreach (DiaSemana diaSemana in Enum.GetValues(typeof(DiaSemana)))
                 {
-                    Console.WriteLine($"{indexDia} - {dia}");
+                    Console.WriteLine($"{indexDia} - {diaSemana}");
+                    indexDia++;
                 }
+                Console.WriteLine("Insira o dia:");
+                stringDiaSemana = Console.ReadLine();
 
                 int indexDiaEscolhido;
                 while (!int.TryParse(stringDiaSemana, out indexDiaEscolhido))
                 {
-                    Console.WriteLine("Escolha o dia da semana:");
+                    Console.WriteLine("Insira o dia:");
                     stringDiaSemana = Console.ReadLine();
                 }
 
@@ -310,27 +318,41 @@ namespace ClinicaVeterinaria
                     Console.Write("Minutos: ");
                     stringHora = Console.ReadLine();
                 }
-                
 
-                //Escolher profissional disponível: (FALTA)
-                foreach (ProfissionalSaude profissional in ProfissionalSaude.profissionaisSaude)
-                {
-                    Console.WriteLine($"{profissional.Id} - {profissional.Nome}");
-                    profissionaisDisponiveis = true;
-                }
 
-                if (!profissionaisDisponiveis)
+                periodoEscolhido = new Período(diaSemanaEscolhido, new TimeSpan(horaEscolhida, minutosEscolhidos,0), Servico.servicos[serviçoEscolhido-1].Duração);
+
+                profissionaisDisponiveis = ProfissionalSaude.profissionaisSaude.Where(profissional => profissional.EstaDisponivel(periodoEscolhido)).ToList();
+
+                if(profissionaisDisponiveis.Count() == 0)
                 {
                     Console.WriteLine("Não há profissionais de saúde disponíveis nesse horário.");
                 }
-
+                else
+                {
+                    HáProfissionaisDisponiveis = true;
+                }
             }
-            
+
+            foreach (ProfissionalSaude profissional in profissionaisDisponiveis)
+            {
+                Console.WriteLine($"{profissional.Id} - {profissional.Nome}"); 
+            }
+            Console.WriteLine("Insira o ID do profissional de saúde:");
+            string stringIdProfissional = Console.ReadLine();
+            int idProfissional; //ID DO PROFISSIONAL
+            while (!int.TryParse(stringIdProfissional, out idProfissional))
+            {
+                Console.WriteLine("Insira o ID do profissional de saúde:");
+                stringIdProfissional = Console.ReadLine();
+            }
+
+
             //Escolher animal de estimação:
             Console.WriteLine("Escolha o animal de estimação:");
             foreach (AnimalEstimacao animal in animaisEstimacaoCliente)
             {
-                Console.WriteLine($"{animal.ID}. {animal.Nome}, {animal.Espécie}, {animal.Idade}, {animal.Género}");
+                Console.WriteLine($"{animal.ID}. {animal.Nome}, {animal.Espécie}, {animal.Idade} anos, {animal.Género}");
             }
 
             Console.WriteLine("Insira o ID do animal:");
@@ -342,7 +364,7 @@ namespace ClinicaVeterinaria
                 stringIdAnimal = Console.ReadLine();
             }
 
-
+            new Consulta(serviçoEscolhido, idProfissional, idAnimal, periodoEscolhido);
 
         }
     }

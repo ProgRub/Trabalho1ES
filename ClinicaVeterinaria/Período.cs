@@ -15,8 +15,16 @@ namespace ClinicaVeterinaria
             this._inicio = inicio;
             this._fim = fim;
             this._dia = dia;
-
         }
+
+        public Período(DiaSemana dia, TimeSpan inicio, int duração)
+        {
+            this._inicio = inicio;
+            this._fim = _inicio + (new TimeSpan((int)(duração / 60), duração % 60, 0));
+            this._dia = dia;
+        }
+
+
 
         public TimeSpan Início
         {
@@ -41,5 +49,6 @@ namespace ClinicaVeterinaria
             {
             }
         }
+
     }
 }

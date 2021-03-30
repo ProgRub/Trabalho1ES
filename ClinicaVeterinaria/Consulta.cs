@@ -7,40 +7,40 @@ namespace ClinicaVeterinaria
     public class Consulta
     {
         public static List<Consulta> consultas = new List<Consulta>();
-        private Servico _servico;
-        private ProfissionalSaude _profissionalSaude;
-        private AnimalEstimacao _animalEstimacao;
+        private int _idServico;
+        private int _idProfissionalSaude;
+        private int _idAnimalEstimacao;
         private Período _periodo;
 
-        public Consulta(Servico servico, ProfissionalSaude profissionalSaude, AnimalEstimacao animalEstimacao, Período periodo)
+        public Consulta(int servico, int profissionalSaude, int animalEstimacao, Período periodo)
         {
-            this._servico = servico;
-            this._profissionalSaude = profissionalSaude;
-            this._animalEstimacao = animalEstimacao;
+            this._idServico = servico;
+            this._idProfissionalSaude = profissionalSaude;
+            this._idAnimalEstimacao = animalEstimacao;
             this._periodo = periodo;
 
             consultas.Add(this);
         }
 
-        public Servico Servico
+        public int Servico
         {
-            get => _servico;
+            get => _idServico;
             set
             {
             }
         }
 
-        public ProfissionalSaude ProfissionalSaude
+        public int ProfissionalSaude
         {
-            get => _profissionalSaude;
+            get => _idProfissionalSaude;
             set
             {
             }
         }
 
-        public AnimalEstimacao AnimalEstimacao
+        public int AnimalEstimacao
         {
-            get => _animalEstimacao;
+            get => _idAnimalEstimacao;
             set
             {
             }

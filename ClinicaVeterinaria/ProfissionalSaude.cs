@@ -86,13 +86,9 @@ namespace ClinicaVeterinaria
         {
             foreach (Período período in _periodosDisponibilidade)
             {
-                Console.WriteLine("HERE");
-                Console.WriteLine(período.Dia + " " + período.Início + " " + período.Fim);
-                Console.WriteLine(periodoConsulta.Dia + " " + periodoConsulta.Início + " " + periodoConsulta.Fim);
                 if (período.Dia == periodoConsulta.Dia && período.Início <= periodoConsulta.Início && período.Fim >= periodoConsulta.Fim)
                 {
-                    Console.WriteLine("HERE1");
-                    ReajustarDisponibilidade(_periodosDisponibilidade.IndexOf(período), periodoConsulta);
+                    //ReajustarDisponibilidade(_periodosDisponibilidade.IndexOf(período), periodoConsulta);
                     return true;
                 }
             }
@@ -108,15 +104,11 @@ namespace ClinicaVeterinaria
             {
                 novoPeriodo1 = new Período(periodoARemover.Dia, periodoARemover.Início, periodoIndisponibilidade.Início);
                 _periodosDisponibilidade.Insert(indexPeriodoARemover, novoPeriodo1);
-                Console.WriteLine("HERE2");
-                Console.WriteLine(novoPeriodo1.Dia + " " + novoPeriodo1.Início + " " + novoPeriodo1.Fim);
             }
             if (periodoARemover.Fim != periodoIndisponibilidade.Fim)
             {
                 novoPeriodo2 = new Período(periodoARemover.Dia, periodoIndisponibilidade.Fim, periodoARemover.Fim);
                 _periodosDisponibilidade.Insert(novoPeriodo1 == null ? indexPeriodoARemover + 1 : indexPeriodoARemover, novoPeriodo2);
-                Console.WriteLine("HERE3");
-                Console.WriteLine(novoPeriodo2.Dia + " " + novoPeriodo2.Início + " " + novoPeriodo2.Fim);
             }
         }
     }
