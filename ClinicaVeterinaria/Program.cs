@@ -123,6 +123,7 @@ namespace ClinicaVeterinaria
                 stringContato = Console.ReadLine();
             }
 
+
             new Cliente(contato, endereco, nome);
         }
 

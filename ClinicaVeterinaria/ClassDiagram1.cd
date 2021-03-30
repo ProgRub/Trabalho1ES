@@ -3,7 +3,7 @@
   <Class Name="ClinicaVeterinaria.Cliente">
     <Position X="8" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAACAAAAABAIAAAAAAAAAAAAAAAEEAQAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAACAAAAABAIAAAAgAAAAAAAAAAMEAQAA=</HashCode>
       <FileName>Cliente.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -32,11 +32,11 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ClinicaVeterinaria.Consulta">
-    <Position X="7.25" Y="7.25" Width="1.5" />
+    <Position X="6.75" Y="6.75" Width="1.5" />
     <AssociationLine Name="Servico" Type="ClinicaVeterinaria.Servico" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="7.25" Y="8.507" />
-        <Point X="5.375" Y="8.507" />
+        <Point X="6.75" Y="8.007" />
+        <Point X="5.375" Y="8.007" />
         <Point X="5.375" Y="5.942" />
         <Point X="5" Y="5.942" />
       </Path>

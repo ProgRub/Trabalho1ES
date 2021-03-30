@@ -8,13 +8,15 @@ namespace ClinicaVeterinaria
     {
 
         public static List<ProfissionalSaude> profissionaisSaude=new List<ProfissionalSaude>();
-        private int _contacto;
+        private int _contacto, _ID;
         private string _endereco;
         private string _nome;
+        private static int ID = 1;
 
 
         public ProfissionalSaude(int contacto, string endereco, string nome)
         {
+            this._ID = ID++;
             this._nome = nome;
             this._contacto = contacto;
             this._endereco = endereco;

@@ -8,17 +8,20 @@ namespace ClinicaVeterinaria
     {
 
         public static List<Cliente> clientes=new List<Cliente>();
-        private int _contacto;
+        private int _contacto, _ID;
         private string _endereco;
         private string _nome;
-        private List<AnimalEstimacao> _animaisEstimacao;
+        private List<int> _animaisEstimacao;
+        private static int ID = 1;
 
-        public Cliente(int contacto, string endereco, string nome)
+        public Cliente(int contacto, string endereco, string nome, List<int> animaisEstimacao)
         {
+
+            this._ID = ID++;
             this._nome = nome;
             this._contacto = contacto;
             this._endereco = endereco;
-            this._animaisEstimacao = new List<AnimalEstimacao>();
+            this._animaisEstimacao = animaisEstimacao;
             clientes.Add(this);
         }
 
@@ -46,7 +49,7 @@ namespace ClinicaVeterinaria
             }
         }
 
-        public List<AnimalEstimacao> AnimaisEstimacao
+        public List<int> AnimaisEstimacao
         {
             get => _animaisEstimacao;
             set
