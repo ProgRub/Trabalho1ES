@@ -88,17 +88,24 @@ namespace ClinicaVeterinaria
             {
                 if (período.Dia == periodoConsulta.Dia && período.Início <= periodoConsulta.Início && período.Fim >= periodoConsulta.Fim)
                 {
-                    //ReajustarDisponibilidade(_periodosDisponibilidade.IndexOf(período), periodoConsulta);
                     return true;
                 }
             }
             return false;
         }
 
-        private void ReajustarDisponibilidade(int indexPeriodoARemover, Período periodoIndisponibilidade)
+        public void ReajustarDisponibilidade(Período periodoIndisponibilidade)
         {
-            Período periodoARemover = _periodosDisponibilidade[indexPeriodoARemover];
-            Período novoPeriodo1 = null, novoPeriodo2 = null;
+            Período periodoARemover = null;
+            foreach (Período período in _periodosDisponibilidade)
+            {
+                if (período.Dia == periodoIndisponibilidade.Dia && período.Início <= periodoIndisponibilidade.Início && período.Fim >= periodoIndisponibilidade.Fim)
+                {
+                    periodoARemover = período;
+                }
+            }
+            int indexPeriodoARemover = _periodosDisponibilidade.IndexOf(periodoARemover);
+            Período novoPeriodo1 = null, novoPeriodo2;
             _periodosDisponibilidade.RemoveAt(indexPeriodoARemover);
             if (periodoARemover.Início != periodoIndisponibilidade.Início)
             {

@@ -11,7 +11,11 @@
   <Class Name="ClinicaVeterinaria.ProfissionalSaude">
     <Position X="6.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
+<<<<<<< Updated upstream
       <HashCode>AAACYAAAAAAAACACFAABAIAAAAAABAAAAAAAAEEESAA=</HashCode>
+=======
+      <HashCode>AAAAYAAAAAAAACACFAABAIAAAAAABAAAAAAAAEEESAA=</HashCode>
+>>>>>>> Stashed changes
       <FileName>ProfissionalSaude.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -32,7 +36,19 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="ClinicaVeterinaria.Consulta">
+<<<<<<< Updated upstream
     <Position X="6.75" Y="6.75" Width="1.5" />
+=======
+    <Position X="7" Y="8" Width="1.5" />
+    <AssociationLine Name="Servico" Type="ClinicaVeterinaria.Servico" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="9.799" />
+        <Point X="5.375" Y="9.799" />
+        <Point X="5.375" Y="6.106" />
+        <Point X="5" Y="6.106" />
+      </Path>
+    </AssociationLine>
+>>>>>>> Stashed changes
     <TypeIdentifier>
       <HashCode>AAgAAAQACAAgAIEAAAAAAAAAAAAQAAAAACAAAAAAAgA=</HashCode>
       <FileName>Consulta.cs</FileName>

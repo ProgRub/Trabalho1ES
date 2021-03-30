@@ -347,6 +347,14 @@ namespace ClinicaVeterinaria
                 stringIdProfissional = Console.ReadLine();
             }
 
+            foreach (ProfissionalSaude profissionalSaude in profissionaisDisponiveis)
+            {
+                if (profissionalSaude.Id == idProfissional)
+                {
+                    profissionalSaude.ReajustarDisponibilidade(periodoEscolhido);
+                }
+            }
+
 
             //Escolher animal de estimação:
             Console.WriteLine("Escolha o animal de estimação:");
