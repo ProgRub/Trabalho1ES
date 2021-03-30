@@ -20,7 +20,7 @@ namespace ClinicaVeterinaria
 
         public TimeSpan Início
         {
-            get => default;
+            get => _inicio;
             set
             {
             }
@@ -28,7 +28,7 @@ namespace ClinicaVeterinaria
 
         public TimeSpan Fim
         {
-            get => default;
+            get => _fim;
             set
             {
             }
@@ -36,7 +36,7 @@ namespace ClinicaVeterinaria
 
         public DiaSemana Dia
         {
-            get => default;
+            get => _dia;
             set
             {
             }
