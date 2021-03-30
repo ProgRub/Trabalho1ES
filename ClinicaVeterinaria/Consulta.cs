@@ -9,12 +9,14 @@ namespace ClinicaVeterinaria
         private Servico _servico;
         private ProfissionalSaude _profissionalSaude;
         private AnimalEstimacao _animalEstimacao;
+        private Período _periodo;
 
-        public Consulta(Servico servico, ProfissionalSaude profissionalSaude, AnimalEstimacao animalEstimacao)
+        public Consulta(Servico servico, ProfissionalSaude profissionalSaude, AnimalEstimacao animalEstimacao, Período periodo)
         {
             this._servico = servico;
             this._profissionalSaude = profissionalSaude;
             this._animalEstimacao = animalEstimacao;
+            this._periodo = periodo;
         }
 
         public Servico Servico
@@ -36,6 +38,14 @@ namespace ClinicaVeterinaria
         public AnimalEstimacao AnimalEstimacao
         {
             get => _animalEstimacao;
+            set
+            {
+            }
+        }
+
+        public Período Período
+        {
+            get => _periodo;
             set
             {
             }

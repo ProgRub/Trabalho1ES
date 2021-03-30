@@ -163,7 +163,7 @@ namespace ClinicaVeterinaria
 
             while (nome.All(char.IsDigit))
             {
-                Console.Write("Insira o nome do cliente (não pode conter dígitos): ");
+                Console.Write("Insira o nome do serviço (não pode conter dígitos): ");
                 nome = Console.ReadLine();
             }
 

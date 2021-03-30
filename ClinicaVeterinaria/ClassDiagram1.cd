@@ -3,7 +3,7 @@
   <Class Name="ClinicaVeterinaria.Cliente">
     <Position X="8" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAACAAAAABAIAAAAgAAAAAAAAAAMEAQAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAgCAAAAABAIAAAAgAAAAAAAAAAMEEQAA=</HashCode>
       <FileName>Cliente.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="ClinicaVeterinaria.ProfissionalSaude">
     <Position X="6.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAACAAAAABAIAAAAAAAAAAAAAAAEEACAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAACAAAAABAIAAAAAABAAAAAAAAEEECAA=</HashCode>
       <FileName>ProfissionalSaude.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,14 +19,14 @@
   <Class Name="ClinicaVeterinaria.AnimalEstimacao">
     <Position X="11.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAgAMAgAACAAgABAAAAAEAgAAAAAAAAAgAAAAAEEAAA=</HashCode>
+      <HashCode>AAgAMAgAACAAhABAAAAAAAgAAAAAAAAAgAAAAAEEAAA=</HashCode>
       <FileName>AnimalEstimacao.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ClinicaVeterinaria.Servico">
     <Position X="3.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAIAAAAEAAAEAAAAAQAAAAAAAAAAAAAAAABAEAAgg=</HashCode>
+      <HashCode>ACAAIAAAAEAAgEAAAAAQAAAAAAAABAAAAAAABAEAAgg=</HashCode>
       <FileName>Servico.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -35,14 +35,14 @@
     <Position X="6.75" Y="6.75" Width="1.5" />
     <AssociationLine Name="Servico" Type="ClinicaVeterinaria.Servico" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6.75" Y="8.007" />
-        <Point X="5.375" Y="8.007" />
+        <Point X="6.75" Y="8.424" />
+        <Point X="5.375" Y="8.424" />
         <Point X="5.375" Y="5.942" />
         <Point X="5" Y="5.942" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAACAAAAAAgACAAAAAAQAAQAAAAAAAAAAAAAgA=</HashCode>
+      <HashCode>AAgAAAQACAAAAAAgACAAAAAAQAAQAAAAAAAAAAAAAgA=</HashCode>
       <FileName>Consulta.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -50,6 +50,13 @@
       <Property Name="ProfissionalSaude" />
       <Property Name="AnimalEstimacao" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="ClinicaVeterinaria.Período">
+    <Position X="1" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACggAAAAAEAAAAAAAAEAAAAAIAAAAA=</HashCode>
+      <FileName>Período.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Interface Name="ClinicaVeterinaria.IHumano">
     <Position X="7" Y="0.75" Width="1.5" />
@@ -70,6 +77,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Género.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ClinicaVeterinaria.DiaSemana">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAABABAAAAAAAAAACAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>DiaSemana.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />
