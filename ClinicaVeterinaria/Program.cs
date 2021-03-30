@@ -15,7 +15,13 @@ namespace ClinicaVeterinaria
             foreach (Período periodo in ProfissionalSaude.profissionaisSaude.Last().PeriodosDisponibilidade)
             {
                 Console.WriteLine(periodo.Dia + " " + periodo.Início + " " + periodo.Fim);
-                Console.WriteLine(periodo.Fim - periodo.Início);
+                //Console.WriteLine(periodo.Fim - periodo.Início);
+            }
+            ProfissionalSaude.VerificarDisponibilidadeProfissionais(new Período(DiaSemana.Segunda, new TimeSpan(10, 0, 0), new TimeSpan(11, 0, 0)));
+            foreach (Período periodo in ProfissionalSaude.profissionaisSaude.First().PeriodosDisponibilidade)
+            {
+                Console.WriteLine(periodo.Dia + " " + periodo.Início + " " + periodo.Fim);
+                //Console.WriteLine(periodo.Fim - periodo.Início);
             }
             while (true)
             {

@@ -7,7 +7,7 @@ namespace ClinicaVeterinaria
     public class ProfissionalSaude : IHumano
     {
 
-        public static List<ProfissionalSaude> profissionaisSaude=new List<ProfissionalSaude>();
+        public static List<ProfissionalSaude> profissionaisSaude = new List<ProfissionalSaude>();
         private static int ContadorID = 1;
         private int _contacto, _ID;
         private string _endereco;
@@ -24,7 +24,7 @@ namespace ClinicaVeterinaria
             this._periodosDisponibilidade = new List<Período>();
             foreach (DiaSemana dia in (DiaSemana[])Enum.GetValues(typeof(DiaSemana)))
             {
-                this._periodosDisponibilidade.Add(new Período(dia, new TimeSpan(10, 0, 0),new TimeSpan(13,0,0)));
+                this._periodosDisponibilidade.Add(new Período(dia, new TimeSpan(10, 0, 0), new TimeSpan(13, 0, 0)));
                 this._periodosDisponibilidade.Add(new Período(dia, new TimeSpan(14, 0, 0), new TimeSpan(17, 0, 0)));
             }
             profissionaisSaude.Add(this);
@@ -70,28 +70,54 @@ namespace ClinicaVeterinaria
             }
         }
 
-        public bool EstaDisponivel(Período periodoConsulta)
+        public static bool VerificarDisponibilidadeProfissionais(Período periodoConsulta)
         {
-            foreach (Período período in _periodosDisponibilidade)
+            foreach (ProfissionalSaude profissionalSaude in profissionaisSaude)
             {
-                if (período.Dia == periodoConsulta.Dia && período.Início<periodoConsulta.Início && período.Fim>periodoConsulta.Fim)
+                if (profissionalSaude.EstaDisponivel(periodoConsulta))
                 {
-                    ReajustarDisponibilidade(_periodosDisponibilidade.IndexOf(período),periodoConsulta);
                     return true;
                 }
             }
             return false;
         }
 
-        private void ReajustarDisponibilidade(int indexPeriodoARemover,Período periodoIndisponibilidade)
+        public bool EstaDisponivel(Período periodoConsulta)
+        {
+            foreach (Período período in _periodosDisponibilidade)
+            {
+                Console.WriteLine("HERE");
+                Console.WriteLine(período.Dia + " " + período.Início + " " + período.Fim);
+                Console.WriteLine(periodoConsulta.Dia + " " + periodoConsulta.Início + " " + periodoConsulta.Fim);
+                if (período.Dia == periodoConsulta.Dia && período.Início <= periodoConsulta.Início && período.Fim >= periodoConsulta.Fim)
+                {
+                    Console.WriteLine("HERE1");
+                    ReajustarDisponibilidade(_periodosDisponibilidade.IndexOf(período), periodoConsulta);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void ReajustarDisponibilidade(int indexPeriodoARemover, Período periodoIndisponibilidade)
         {
             Período periodoARemover = _periodosDisponibilidade[indexPeriodoARemover];
-            Período novoPeriodo1 = new Período(periodoARemover.Dia, periodoARemover.Início, periodoIndisponibilidade.Início);
-            Período novoPeriodo2 = new Período(periodoARemover.Dia, periodoIndisponibilidade.Fim, periodoARemover.Fim);
+            Período novoPeriodo1 = null, novoPeriodo2 = null;
             _periodosDisponibilidade.RemoveAt(indexPeriodoARemover);
-            _periodosDisponibilidade.Insert(indexPeriodoARemover, novoPeriodo1);
-            _periodosDisponibilidade.Insert(indexPeriodoARemover+1, novoPeriodo2);
-
+            if (periodoARemover.Início != periodoIndisponibilidade.Início)
+            {
+                novoPeriodo1 = new Período(periodoARemover.Dia, periodoARemover.Início, periodoIndisponibilidade.Início);
+                _periodosDisponibilidade.Insert(indexPeriodoARemover, novoPeriodo1);
+                Console.WriteLine("HERE2");
+                Console.WriteLine(novoPeriodo1.Dia + " " + novoPeriodo1.Início + " " + novoPeriodo1.Fim);
+            }
+            if (periodoARemover.Fim != periodoIndisponibilidade.Fim)
+            {
+                novoPeriodo2 = new Período(periodoARemover.Dia, periodoIndisponibilidade.Fim, periodoARemover.Fim);
+                _periodosDisponibilidade.Insert(novoPeriodo1 == null ? indexPeriodoARemover + 1 : indexPeriodoARemover, novoPeriodo2);
+                Console.WriteLine("HERE3");
+                Console.WriteLine(novoPeriodo2.Dia + " " + novoPeriodo2.Início + " " + novoPeriodo2.Fim);
+            }
         }
     }
 }
