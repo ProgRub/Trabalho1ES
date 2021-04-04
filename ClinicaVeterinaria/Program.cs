@@ -12,13 +12,11 @@ namespace ClinicaVeterinaria
             new ProfissionalSaude(999999999, "aaa@gmail.com", "Rúben");
             new ProfissionalSaude(888888888, "bbb@gmail.com", "Diego");
             new ProfissionalSaude(777777777, "ccc@gmail.com", "Maria");
-            foreach (Período periodo in ProfissionalSaude.profissionaisSaude.Last().PeriodosDisponibilidade)
-            {
-                Console.WriteLine(periodo.Dia + " " + periodo.Início + " " + periodo.Fim);
-                //Console.WriteLine(periodo.Fim - periodo.Início);
-            }
-            ProfissionalSaude.VerificarDisponibilidadeProfissionais(new Período(DiaSemana.Segunda, new TimeSpan(10, 0, 0), new TimeSpan(11, 0, 0)));
-            foreach (Período periodo in ProfissionalSaude.profissionaisSaude.First().PeriodosDisponibilidade)
+            Período periodoConsulta = new Período(DiaSemana.Segunda, new TimeSpan(11, 0, 0), new TimeSpan(12, 0, 0));
+            Período periodoGerado1 = new Período(DiaSemana.Segunda, new TimeSpan(10, 0, 0), new TimeSpan(11, 0, 0));
+            Período periodoGerado2 = new Período(DiaSemana.Segunda, new TimeSpan(12, 0, 0), new TimeSpan(13, 0, 0));
+            ProfissionalSaude.profissionaisSaude[0].ReajustarDisponibilidade(periodoConsulta);
+            foreach (Período periodo in ProfissionalSaude.profissionaisSaude[0].PeriodosDisponibilidade)
             {
                 Console.WriteLine(periodo.Dia + " " + periodo.Início + " " + periodo.Fim);
                 //Console.WriteLine(periodo.Fim - periodo.Início);
