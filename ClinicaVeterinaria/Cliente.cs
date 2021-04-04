@@ -15,8 +15,6 @@ namespace ClinicaVeterinaria
         private string _nome;
         private List<int> _animaisEstimacao;
         private static int ID = 1;
-        private int _nrConsultas;
-        private Frequência _frequencia;
 
         public Cliente(int contacto, string endereco, string nome, List<int> animaisEstimacao)
         {
@@ -26,8 +24,6 @@ namespace ClinicaVeterinaria
             this._contacto = contacto;
             this._endereco = endereco;
             this._animaisEstimacao = animaisEstimacao;
-            this._nrConsultas = 0;
-            this._frequencia = Frequência.Nunca;
             clientes.Add(this);
         }
 
@@ -71,45 +67,55 @@ namespace ClinicaVeterinaria
             }
         }
 
-        public int NrConsultas
-        {
-            get => _nrConsultas;
-            set
-            {
-            }
-        }
-
-        public Frequência Frequencia
-        {
-            get => _frequencia;
-            set
-            {
-            }
-        }
 
         public void criarRelatório()
         {
 
-            string path = $@"C:\Users\diego\Documents\GitHub\Trabalho1ES\RelatorioCliente{_ID}.txt";
+            string path = $@"C:\Users\diego\Documents\GitHub\Trabalho1ES\RelatorioCliente{this._ID}.txt";
             if (!File.Exists(path))
             {
                 using (StreamWriter sw = File.CreateText(path))
                 {
 
-                    sw.WriteLine($"RELATÓRIO - CLIENTE Nº {_ID}");
-                    sw.WriteLine($"Nome: {Cliente.clientes[_ID - 1].Nome}");
-                    sw.WriteLine($"Frequência: {Cliente.clientes[_ID - 1].Frequencia}");
-                    sw.WriteLine($"Número de Consultas: {Cliente.clientes[_ID - 1].NrConsultas}");
+                    sw.WriteLine($"RELATÓRIO - CLIENTE Nº {this._ID}");
+                    sw.WriteLine($"Nome: {this.Nome}");
+
+                    var consultasCliente = Consulta.consultas.Where(consulta => this._ID == consulta.Cliente).ToList();
+
+                    int nrConsultas = consultasCliente.Count();
+
+                    Frequência frequencia = Frequência.Nunca;
+
+                    switch (nrConsultas)
+                    {
+                        case 0:
+                            frequencia = Frequência.Nunca;
+                            break;
+                        case 1:
+                        case 2:
+                            frequencia = Frequência.Raramente;
+                            break;
+                        case 3:
+                        case 4:
+                            frequencia = Frequência.Frequente;
+                            break;
+                        default:
+                            frequencia = Frequência.MuitoFrequente;
+                            break;
+                    }
+
+
+                    sw.WriteLine($"Frequência: {frequencia}");
+                    sw.WriteLine($"Número de Consultas: {nrConsultas}");
                     sw.WriteLine($"Animais de Estimação:");
-                    var animaisEstimacaoCliente = AnimalEstimacao.animaisEstimacao.Where(animal => Cliente.clientes[_ID - 1].AnimaisEstimacao.Contains(animal.ID)).ToList();
+                    var animaisEstimacaoCliente = AnimalEstimacao.animaisEstimacao.Where(animal => this.AnimaisEstimacao.Contains(animal.ID)).ToList();
                     foreach (AnimalEstimacao animal in animaisEstimacaoCliente)
                     {
                         sw.WriteLine($"- {animal.Nome}, {animal.Espécie}, {animal.Idade} anos, {animal.Género}");
                     }
 
-                    sw.WriteLine($"Serviços Prestados:");
-                    var consultasCliente = Consulta.consultas.Where(consulta => Cliente.clientes[_ID - 1]._ID == consulta.Cliente).ToList();
 
+                    sw.WriteLine($"Serviços Prestados:");
                     foreach (Consulta consulta in consultasCliente)
                     {
                         foreach(Servico servico in Servico.servicos)

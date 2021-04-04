@@ -79,7 +79,7 @@ namespace TestClinica
             Período periodoGerado1 = new Período(DiaSemana.Segunda, new TimeSpan(10, 0, 0), new TimeSpan(13, 0, 0));
             Período periodoGerado2 = new Período(DiaSemana.Segunda, new TimeSpan(14, 0, 0), new TimeSpan(17, 0, 0));
             ProfissionalSaude.VerificarDisponibilidadeProfissionais(periodoConsulta);
-            profissionalSaude.PeriodosDisponibilidade.Should().ContainEquivalentOf(periodoGerado1).And.Contain(periodoGerado2);
+            profissionalSaude.PeriodosDisponibilidade.Should().ContainEquivalentOf(periodoGerado1).And.ContainEquivalentOf(periodoGerado2);
         }
     }
 }

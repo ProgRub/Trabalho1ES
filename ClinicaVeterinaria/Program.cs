@@ -382,20 +382,6 @@ namespace ClinicaVeterinaria
             new Consulta(serviçoEscolhido, idProfissional, idAnimal, periodoEscolhido, idCliente);
 
 
-            Cliente.clientes[idCliente - 1].NrConsultas++;
-
-            switch (Cliente.clientes[idCliente - 1].NrConsultas)
-            {
-                case 1:
-                    Cliente.clientes[idCliente - 1].Frequencia = Frequência.Raramente;
-                    break;
-                case 3:
-                    Cliente.clientes[idCliente - 1].Frequencia = Frequência.Frequente;
-                    break;
-                case 5:
-                    Cliente.clientes[idCliente - 1].Frequencia = Frequência.MuitoFrequente;
-                    break;
-            }
 
 
         }
