@@ -10,14 +10,16 @@ namespace ClinicaVeterinaria
         private int _idServico;
         private int _idProfissionalSaude;
         private int _idAnimalEstimacao;
+        private int _idCliente;
         private Período _periodo;
 
-        public Consulta(int servico, int profissionalSaude, int animalEstimacao, Período periodo)
+        public Consulta(int servico, int profissionalSaude, int animalEstimacao, Período periodo, int idCliente)
         {
             this._idServico = servico;
             this._idProfissionalSaude = profissionalSaude;
             this._idAnimalEstimacao = animalEstimacao;
             this._periodo = periodo;
+            this._idCliente = idCliente;
 
             consultas.Add(this);
         }
@@ -54,7 +56,13 @@ namespace ClinicaVeterinaria
             }
         }
 
-        
+        public int Cliente
+        {
+            get => _idCliente;
+            set
+            {
+            }
+        }
 
 
     }

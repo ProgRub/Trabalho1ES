@@ -33,7 +33,7 @@ namespace ClinicaVeterinaria
 
         static void Menu()
         {
-            Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço\n4: Marcar Consulta");
+            Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço\n4: Marcar Consulta\n5: Criar Relatório");
             Console.Write("Opção: ");
             string input = Console.ReadLine();
             int opcao = 0;
@@ -41,7 +41,7 @@ namespace ClinicaVeterinaria
             while (!int.TryParse(input, out opcao) && (opcao < 0 || opcao > 3))
             {
                 Console.WriteLine("OPÇÃO INVÁLIDA!");
-                Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço\n4: Marcar Consulta");
+                Console.WriteLine("Por favor selecione uma opção\n1: Registar Animal\n2: Registar Cliente\n3: Criar Serviço\n4: Marcar Consulta\n5: Criar Relatório");
                 Console.Write("Opção: ");
                 input = Console.ReadLine();
             }
@@ -58,6 +58,9 @@ namespace ClinicaVeterinaria
                     break;
                 case 4:
                     MarcarConsulta();
+                    break;
+                case 5:
+                    criarRelatórioCliente();
                     break;
             }
         }
@@ -228,6 +231,12 @@ namespace ClinicaVeterinaria
                 return;
             }
 
+            if (AnimalEstimacao.animaisEstimacao.Count() == 0)
+            {
+                Console.WriteLine("Não há animais de estimação registados.");
+                return;
+            }
+
             Console.WriteLine("Lista de Clientes:");
             foreach (Cliente cliente in Cliente.clientes)
             {
@@ -372,8 +381,56 @@ namespace ClinicaVeterinaria
                 stringIdAnimal = Console.ReadLine();
             }
 
-            new Consulta(serviçoEscolhido, idProfissional, idAnimal, periodoEscolhido);
+            new Consulta(serviçoEscolhido, idProfissional, idAnimal, periodoEscolhido, idCliente);
+
+
+            Cliente.clientes[idCliente - 1].NrConsultas++;
+
+            switch (Cliente.clientes[idCliente - 1].NrConsultas)
+            {
+                case 1:
+                    Cliente.clientes[idCliente - 1].Frequencia = Frequência.Raramente;
+                    break;
+                case 3:
+                    Cliente.clientes[idCliente - 1].Frequencia = Frequência.Frequente;
+                    break;
+                case 5:
+                    Cliente.clientes[idCliente - 1].Frequencia = Frequência.MuitoFrequente;
+                    break;
+            }
+
 
         }
+
+        static void criarRelatórioCliente()
+        {
+            if (Cliente.clientes.Count() == 0)
+            {
+                Console.WriteLine("Nenhum cliente registado.");
+                return;
+            }
+
+            Console.WriteLine("Lista de Clientes:");
+            foreach (Cliente cliente in Cliente.clientes)
+            {
+                Console.WriteLine($"{cliente.Id} - {cliente.Nome}");
+            }
+            Console.Write("Insira o ID do cliente:");
+            string stringIdCliente = Console.ReadLine();
+            int idCliente;
+            while (!int.TryParse(stringIdCliente, out idCliente))
+            {
+                Console.WriteLine("Insira o ID do cliente:");
+                stringIdCliente = Console.ReadLine();
+            }
+
+            Cliente.clientes[idCliente - 1].criarRelatório();
+            Console.WriteLine("Relatório criado com sucesso.");
+
+
+
+        }
+
+
     }
 }
