@@ -71,63 +71,67 @@ namespace ClinicaVeterinaria
         public void criarRelatório()
         {
 
-            string path = $@"C:\Users\diego\Documents\GitHub\Trabalho1ES\RelatorioCliente{this._ID}.txt";
-            if (!File.Exists(path))
+            string aux = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string dir = Path.GetFullPath(Path.Combine(aux, @"..\..\..\..\"));
+            string path = Path.Combine(dir, $"RelatorioCliente{this._ID}.txt");
+
+            if (File.Exists(path))
             {
-                using (StreamWriter sw = File.CreateText(path))
+                File.Delete(path);
+            }
+
+            using (StreamWriter sw = File.CreateText(path))
+            {
+
+                sw.WriteLine($"RELATÓRIO - CLIENTE Nº {this._ID}");
+                sw.WriteLine($"Nome: {this.Nome}");
+
+                var consultasCliente = Consulta.consultas.Where(consulta => this._ID == consulta.Cliente).ToList();
+
+                int nrConsultas = consultasCliente.Count();
+
+                Frequência frequencia = Frequência.Nunca;
+
+                switch (nrConsultas)
                 {
+                    case 0:
+                        break;
+                    case 1:
+                    case 2:
+                        frequencia = Frequência.Raramente;
+                        break;
+                    case 3:
+                    case 4:
+                        frequencia = Frequência.Frequente;
+                        break;
+                    default:
+                        frequencia = Frequência.MuitoFrequente;
+                        break;
+                }
 
-                    sw.WriteLine($"RELATÓRIO - CLIENTE Nº {this._ID}");
-                    sw.WriteLine($"Nome: {this.Nome}");
 
-                    var consultasCliente = Consulta.consultas.Where(consulta => this._ID == consulta.Cliente).ToList();
+                sw.WriteLine($"Frequência: {frequencia}");
+                sw.WriteLine($"Número de Consultas: {nrConsultas}");
+                sw.WriteLine($"Animais de Estimação:");
+                var animaisEstimacaoCliente = AnimalEstimacao.animaisEstimacao.Where(animal => this.AnimaisEstimacao.Contains(animal.ID)).ToList();
+                foreach (AnimalEstimacao animal in animaisEstimacaoCliente)
+                {
+                    sw.WriteLine($"- {animal.Nome}, {animal.Espécie}, {animal.Idade} anos, {animal.Género}");
+                }
 
-                    int nrConsultas = consultasCliente.Count();
 
-                    Frequência frequencia = Frequência.Nunca;
-
-                    switch (nrConsultas)
+                sw.WriteLine($"Serviços Prestados:");
+                foreach (Consulta consulta in consultasCliente)
+                {
+                    foreach(Servico servico in Servico.servicos)
                     {
-                        case 0:
-                            frequencia = Frequência.Nunca;
-                            break;
-                        case 1:
-                        case 2:
-                            frequencia = Frequência.Raramente;
-                            break;
-                        case 3:
-                        case 4:
-                            frequencia = Frequência.Frequente;
-                            break;
-                        default:
-                            frequencia = Frequência.MuitoFrequente;
-                            break;
-                    }
-
-
-                    sw.WriteLine($"Frequência: {frequencia}");
-                    sw.WriteLine($"Número de Consultas: {nrConsultas}");
-                    sw.WriteLine($"Animais de Estimação:");
-                    var animaisEstimacaoCliente = AnimalEstimacao.animaisEstimacao.Where(animal => this.AnimaisEstimacao.Contains(animal.ID)).ToList();
-                    foreach (AnimalEstimacao animal in animaisEstimacaoCliente)
-                    {
-                        sw.WriteLine($"- {animal.Nome}, {animal.Espécie}, {animal.Idade} anos, {animal.Género}");
-                    }
-
-
-                    sw.WriteLine($"Serviços Prestados:");
-                    foreach (Consulta consulta in consultasCliente)
-                    {
-                        foreach(Servico servico in Servico.servicos)
+                        if(servico.Id == consulta.Servico)
                         {
-                            if(servico.Id == consulta.Servico)
-                            {
-                                sw.WriteLine($"- {servico.Nome}");
-                            }
+                            sw.WriteLine($"- {servico.Nome}");
                         }
                     }
-
                 }
+
             }
 
 

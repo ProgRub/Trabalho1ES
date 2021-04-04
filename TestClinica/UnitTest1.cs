@@ -19,9 +19,9 @@ namespace TestClinica
         {
             profissionalSaude=new ProfissionalSaude(999999999, "aaa@gmail.com", "Rúben");
             animalEstimacao = new AnimalEstimacao("Ruca", 7, "Gato", Género.Masculino);
-            cliente = new Cliente(555555555, "bbb@gmail.com","Diego", new List<int> {1 });
+            cliente = new Cliente(555555555, "bbb@gmail.com","Diego", new List<int> {animalEstimacao.ID});
             Servico servico = new Servico(new TimeSpan(0, 15, 0), "", 5.20, "Vacina");
-            consulta = new Consulta(1, 1, 1, new Período(DiaSemana.Segunda, new TimeSpan(10, 0, 0), new TimeSpan(10, 15, 0)), 1);
+            consulta = new Consulta(servico.Id, profissionalSaude.Id, animalEstimacao.ID, new Período(DiaSemana.Segunda, new TimeSpan(10, 0, 0), new TimeSpan(10, 15, 0)), cliente.Id);
 
         }
 
@@ -98,24 +98,26 @@ namespace TestClinica
         {
             string aux = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             string dir = Path.GetFullPath(Path.Combine(aux, @"..\..\..\..\"));
-            string filePath = Path.Combine(dir, "RelatorioCliente1.txt");
+            string filePath = Path.Combine(dir, $"RelatorioCliente{cliente.Id}.txt");
             Console.WriteLine(filePath);
             cliente.criarRelatório();
             string text = System.IO.File.ReadAllText(filePath);
-            string relatorio = $"RELATÓRIO - CLIENTE Nº {cliente.Id}\n";
-            relatorio += $"Nome: {cliente.Nome}\n";
-            relatorio += $"Frequência: {Frequência.Raramente}\n";
-            relatorio += $"Número de Consultas: {1}\n";
-                relatorio += $"- {animalEstimacao.Nome}, {animalEstimacao.Espécie}, {animalEstimacao.Idade} anos, {animalEstimacao.Género}\n";
+            string relatorio = $"RELATÓRIO - CLIENTE Nº {cliente.Id}" + Environment.NewLine;
+            relatorio += $"Nome: {cliente.Nome}" + Environment.NewLine;
+            relatorio += $"Frequência: {Frequência.Raramente}" + Environment.NewLine;
+            relatorio += $"Número de Consultas: {1}" + Environment.NewLine;
+            relatorio += "Animais de Estimação:" + Environment.NewLine;
+            relatorio += $"- {animalEstimacao.Nome}, {animalEstimacao.Espécie}, {animalEstimacao.Idade} anos, {animalEstimacao.Género}" + Environment.NewLine;
             var consultasCliente = Consulta.consultas.Where(consulta => cliente.Id == consulta.Cliente).ToList();
 
+            relatorio += "Serviços Prestados:"+Environment.NewLine;
             foreach (Consulta consulta in consultasCliente)
             {
                 foreach (Servico servico in Servico.servicos)
                 {
                     if (servico.Id == consulta.Servico)
                     {
-                        relatorio += $"- {servico.Nome}";
+                        relatorio += $"- {servico.Nome}" + Environment.NewLine;
                     }
                 }
             }
