@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace ClinicaVeterinaria
 {
@@ -9,6 +10,10 @@ namespace ClinicaVeterinaria
     {
         static void Main(string[] args)
         {
+            string aux = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string dir = Path.GetFullPath(Path.Combine(aux, @"..\..\..\..\"));
+            string filePath = Path.Combine(dir, "RelatorioCliente1.txt");
+            Console.WriteLine(filePath);
             new ProfissionalSaude(999999999, "aaa@gmail.com", "Rúben");
             new ProfissionalSaude(888888888, "bbb@gmail.com", "Diego");
             new ProfissionalSaude(777777777, "ccc@gmail.com", "Maria");
