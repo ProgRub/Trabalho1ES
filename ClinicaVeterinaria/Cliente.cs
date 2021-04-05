@@ -68,10 +68,7 @@ namespace ClinicaVeterinaria
 
         public void CriarRelatório()
         {
-
-            string aux = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            string dir = Path.GetFullPath(Path.Combine(aux, @"..\..\..\..\"));
-            string path = Path.Combine(dir, $"RelatorioCliente{this._ID}.txt");
+            string path = Path.Combine(Path.GetFullPath(Path.Combine(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), @"..\..\..\..\")), $"RelatorioCliente{this._ID}.txt");
 
             if (File.Exists(path))
             {

@@ -93,27 +93,29 @@ namespace ClinicaVeterinaria
             return false;
         }
 
-        public void ReajustarDisponibilidade(Período periodoIndisponibilidade)
+        public void ReajustarDisponibilidade(Período periodoConsulta)
         {
             Período periodoARemover = null;
+            int indexPeriodoARemover = 0;
             foreach (Período período in _periodosDisponibilidade)
             {
-                if (período.Dia == periodoIndisponibilidade.Dia && período.Início <= periodoIndisponibilidade.Início && período.Fim >= periodoIndisponibilidade.Fim)
+                if (período.Dia == periodoConsulta.Dia && período.Início <= periodoConsulta.Início && período.Fim >= periodoConsulta.Fim)
                 {
                     periodoARemover = período;
+                    break;
                 }
+                indexPeriodoARemover++;
             }
-            int indexPeriodoARemover = _periodosDisponibilidade.IndexOf(periodoARemover);
             Período novoPeriodo1 = null, novoPeriodo2;
             _periodosDisponibilidade.RemoveAt(indexPeriodoARemover);
-            if (periodoARemover.Início != periodoIndisponibilidade.Início)
-            {
-                novoPeriodo1 = new Período(periodoARemover.Dia, periodoARemover.Início, periodoIndisponibilidade.Início);
+            if (periodoARemover.Início != periodoConsulta.Início)
+            { //se o periodo de consulta não começa no início do período de disponibilidade então é preciso fazer um novo período que acaba no início do período da consulta
+                novoPeriodo1 = new Período(periodoARemover.Dia, periodoARemover.Início, periodoConsulta.Início);
                 _periodosDisponibilidade.Insert(indexPeriodoARemover, novoPeriodo1);
             }
-            if (periodoARemover.Fim != periodoIndisponibilidade.Fim)
-            {
-                novoPeriodo2 = new Período(periodoARemover.Dia, periodoIndisponibilidade.Fim, periodoARemover.Fim);
+            if (periodoARemover.Fim != periodoConsulta.Fim)
+            { //se o periodo de consulta não acaba ao mesmo tempo que o periodo de disponibilidade do profissional então é preciso acrescentar um periodo que acabe antes do início do periodo da consulta
+                novoPeriodo2 = new Período(periodoARemover.Dia, periodoConsulta.Fim, periodoARemover.Fim);
                 _periodosDisponibilidade.Insert(novoPeriodo1 == null ? indexPeriodoARemover + 1 : indexPeriodoARemover, novoPeriodo2);
             }
         }
