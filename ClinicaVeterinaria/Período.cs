@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ClinicaVeterinaria
 {
     public class Período
     {
-        private TimeSpan _inicio;
-        private TimeSpan _fim;
-        private DiaSemana _dia;
+        private readonly TimeSpan _inicio;
+        private readonly TimeSpan _fim;
+        private readonly DiaSemana _dia;
 
         public Período(DiaSemana dia, TimeSpan inicio, TimeSpan fim)
         {

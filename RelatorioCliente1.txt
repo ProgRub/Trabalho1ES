@@ -1,8 +1,0 @@
-RELATÓRIO - CLIENTE Nº 1
-Nome: Diego
-Frequência: Raramente
-Número de Consultas: 1
-Animais de Estimação:
-- Ruca, Gato, 7 anos, Masculino
-Serviços Prestados:
-- Vacina

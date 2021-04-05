@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 
 namespace ClinicaVeterinaria
@@ -10,9 +8,9 @@ namespace ClinicaVeterinaria
         public static List<AnimalEstimacao> animaisEstimacao = new List<AnimalEstimacao>();
         private static int contadorID = 1;
 
-        private string _nome, _especie;
-        private int _idade, _ID;
-        private Género _genero;
+        private readonly string _nome, _especie;
+        private readonly int _idade, _ID;
+        private readonly Género _genero;
 
         public AnimalEstimacao(string nome, int idade, string especie, Género genero)
         {

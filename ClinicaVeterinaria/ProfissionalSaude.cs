@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ClinicaVeterinaria
 {
@@ -9,10 +8,10 @@ namespace ClinicaVeterinaria
 
         public static List<ProfissionalSaude> profissionaisSaude = new List<ProfissionalSaude>();
         private static int ContadorID = 1;
-        private int _contacto, _ID;
-        private string _endereco;
-        private string _nome;
-        private List<Período> _periodosDisponibilidade;
+        private readonly int _contacto, _ID;
+        private readonly string _endereco;
+        private readonly string _nome;
+        private readonly List<Período> _periodosDisponibilidade;
 
 
         public ProfissionalSaude(int contacto, string endereco, string nome)

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ClinicaVeterinaria
 {
@@ -8,11 +7,11 @@ namespace ClinicaVeterinaria
     {
 
         public static List<Servico> servicos=new List<Servico>();
-        private TimeSpan _duracao;
-        private string _medicamentos;
-        private string _nome;
-        private double _preco;
-        private int _ID;
+        private readonly TimeSpan _duracao;
+        private readonly string _medicamentos;
+        private readonly string _nome;
+        private readonly double _preco;
+        private readonly int _ID;
         private static int ID = 1;
 
         public Servico(TimeSpan duracao, string medicamentos, double preco, string nome)

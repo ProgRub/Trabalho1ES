@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ClinicaVeterinaria
 {
     public class Consulta
     {
         public static List<Consulta> consultas = new List<Consulta>();
-        private int _idServico;
-        private int _idProfissionalSaude;
-        private int _idAnimalEstimacao;
-        private int _idCliente;
-        private Período _periodo;
+        private readonly int _idServico;
+        private readonly int _idProfissionalSaude;
+        private readonly int _idAnimalEstimacao;
+        private readonly int _idCliente;
+        private readonly Período _periodo;
 
         public Consulta(int servico, int profissionalSaude, int animalEstimacao, Período periodo, int idCliente)
         {
