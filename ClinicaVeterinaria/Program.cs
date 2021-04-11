@@ -393,6 +393,7 @@ namespace ClinicaVeterinaria
             if (Cliente.clientes.Count() == 0)
             {
                 Console.WriteLine("\nNenhum cliente registado.");
+                AguardarPressionarTecla();
                 return;
             }
 
