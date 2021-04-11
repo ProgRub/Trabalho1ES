@@ -159,8 +159,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nResposta: ");
             string animaisClienteSelecionados = Console.ReadLine();
             string[] stringsIDsAnimais = animaisClienteSelecionados.Split(",");
-            int idAExaminar;
-            while (!stringsIDsAnimais.All(id => int.TryParse(id, out idAExaminar) && idAExaminar>0 && idAExaminar <=AnimalEstimacao.animaisEstimacao.Count))
+            while (!stringsIDsAnimais.All(id => int.TryParse(id, out int idAExaminar) && idAExaminar > 0 && idAExaminar <= AnimalEstimacao.animaisEstimacao.Count))
             {
                 Console.Write("\nPelo menos um dos valores não é um número positivo ou é um ID que não existe, tente outra vez\nResposta: ");
                 animaisClienteSelecionados = Console.ReadLine();
