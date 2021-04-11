@@ -79,7 +79,7 @@ namespace ClinicaVeterinaria
 
             Console.Write("\nInsira a idade (não pode conter letras): ");
             string auxIdadeAnimal = Console.ReadLine();
-            while (!int.TryParse(auxIdadeAnimal, out idadeAnimal))
+            while (!int.TryParse(auxIdadeAnimal, out idadeAnimal) || idadeAnimal<=0)
             {
                 Console.Write("\nInsira a idade (não pode conter letras): ");
                 auxIdadeAnimal = Console.ReadLine();
@@ -144,7 +144,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o número telefónico do cliente (não pode conter letras e deve ter 9 dígitos): ");
             string stringContato = Console.ReadLine();
             int contatoCliente;
-            while (!int.TryParse(stringContato, out contatoCliente) || stringContato.Length != 9)
+            while (!int.TryParse(stringContato, out contatoCliente) || stringContato.Length != 9 || contatoCliente <= 0)
             {
                 Console.Write("\nInsira o número telefónico do cliente (não pode conter letras e deve ter 9 dígitos): ");
                 stringContato = Console.ReadLine();
@@ -159,9 +159,10 @@ namespace ClinicaVeterinaria
             Console.Write("\nResposta: ");
             string animaisClienteSelecionados = Console.ReadLine();
             string[] stringsIDsAnimais = animaisClienteSelecionados.Split(",");
-            while (!stringsIDsAnimais.All(id => int.TryParse(id, out _)))
+            int idAExaminar;
+            while (!stringsIDsAnimais.All(id => int.TryParse(id, out idAExaminar) && idAExaminar>0 && idAExaminar <=AnimalEstimacao.animaisEstimacao.Count))
             {
-                Console.Write("\nPelo menos um dos valores não é um número, tente outra vez\nResposta: ");
+                Console.Write("\nPelo menos um dos valores não é um número positivo ou é um ID que não existe, tente outra vez\nResposta: ");
                 animaisClienteSelecionados = Console.ReadLine();
                 stringsIDsAnimais = animaisClienteSelecionados.Split(",");
             }
@@ -196,7 +197,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o preço(euros): ");
             string stringPreço = Console.ReadLine();
             double preço;
-            while (!double.TryParse(stringPreço, out preço))
+            while (!double.TryParse(stringPreço, out preço) || preço<0)
             {
                 Console.Write("\nInsira o preço(euros): ");
                 stringPreço = Console.ReadLine();
@@ -205,10 +206,10 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira a duração (em minutos): ");
             string stringDuração = Console.ReadLine();
             int duração;
-            while (!int.TryParse(stringDuração, out duração))
+            while (!int.TryParse(stringDuração, out duração) || duração <= 0)
             {
                 Console.Write("\nInsira a duração (em minutos): ");
-                stringPreço = Console.ReadLine();
+                stringDuração = Console.ReadLine();
             }
 
             new Servico(new TimeSpan((int)(duração/60), duração%60, 0), medicamentos, preço, nome);
@@ -244,7 +245,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o ID do cliente: ");
             string stringIdClienteSelecionado = Console.ReadLine();
             int idClienteSelecionado;
-            while (!int.TryParse(stringIdClienteSelecionado, out idClienteSelecionado))
+            while (!int.TryParse(stringIdClienteSelecionado, out idClienteSelecionado) || idClienteSelecionado>Cliente.clientes.Count || idClienteSelecionado<=0)
             {
                 Console.Write("\nInsira o ID do cliente: ");
                 stringIdClienteSelecionado = Console.ReadLine();
@@ -276,7 +277,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nEscolha o tipo de Serviço: ");
             string stringServiçoSelecionado = Console.ReadLine();
             int serviçoSelecionado;
-            while (!int.TryParse(stringServiçoSelecionado, out serviçoSelecionado))
+            while (!int.TryParse(stringServiçoSelecionado, out serviçoSelecionado) || serviçoSelecionado>Servico.servicos.Count|| serviçoSelecionado<=0)
             {
                 Console.Write("\nEscolha o tipo de Serviço: ");
                 stringServiçoSelecionado = Console.ReadLine();
@@ -290,7 +291,7 @@ namespace ClinicaVeterinaria
             {
                 //Escolher dia semana:
                 string stringDiaSemana = "1";
-                Console.Write("\nEscolha o dia da semana: ");
+                Console.WriteLine("\nEscolha o dia da semana: ");
                 int indexDia = 1;
                 foreach (DiaSemana diaSemana in Enum.GetValues(typeof(DiaSemana)))
                 {
@@ -301,7 +302,7 @@ namespace ClinicaVeterinaria
                 stringDiaSemana = Console.ReadLine();
 
                 int indexDiaEscolhido;
-                while (!int.TryParse(stringDiaSemana, out indexDiaEscolhido))
+                while (!int.TryParse(stringDiaSemana, out indexDiaEscolhido) || indexDiaEscolhido > 5 || indexDiaEscolhido <= 0)
                 {
                     Console.Write("\nInsira o dia: ");
                     stringDiaSemana = Console.ReadLine();
@@ -314,7 +315,7 @@ namespace ClinicaVeterinaria
                 Console.Write("Horas: ");
                 string stringHora = Console.ReadLine();
                 int horaEscolhida;
-                while (!int.TryParse(stringHora, out horaEscolhida))
+                while (!int.TryParse(stringHora, out horaEscolhida) || horaEscolhida > 24 || horaEscolhida <= 0)
                 {
                     Console.Write("Horas: ");
                     stringHora = Console.ReadLine();
@@ -323,14 +324,14 @@ namespace ClinicaVeterinaria
                 Console.Write("Minutos: ");
                 string stringMinutos = Console.ReadLine();
                 int minutosEscolhidos;
-                while (!int.TryParse(stringMinutos, out minutosEscolhidos))
+                while (!int.TryParse(stringMinutos, out minutosEscolhidos) || minutosEscolhidos > 60 || minutosEscolhidos < 0)
                 {
                     Console.Write("Minutos: ");
                     stringHora = Console.ReadLine();
                 }
 
 
-                periodoSelecionado = new Período(diaSemanaEscolhido, new TimeSpan(horaEscolhida, minutosEscolhidos,0), Servico.servicos[serviçoSelecionado - 1].Duração);
+                periodoSelecionado = new Período(diaSemanaEscolhido, new TimeSpan(horaEscolhida, minutosEscolhidos,0), (int)Servico.servicos[serviçoSelecionado - 1].Duração.TotalMinutes);
 
                 profissionaisDisponiveis = ProfissionalSaude.profissionaisSaude.Where(profissional => profissional.EstaDisponivel(periodoSelecionado)).ToList();
 
@@ -351,7 +352,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o ID do profissional de saúde: ");
             string stringIdProfissional = Console.ReadLine();
             int idProfissionalSelecionado;
-            while (!int.TryParse(stringIdProfissional, out idProfissionalSelecionado))
+            while (!int.TryParse(stringIdProfissional, out idProfissionalSelecionado) || idProfissionalSelecionado > ProfissionalSaude.profissionaisSaude.Count || idProfissionalSelecionado <= 0)
             {
                 Console.Write("\nInsira o ID do profissional de saúde: ");
                 stringIdProfissional = Console.ReadLine();
@@ -362,9 +363,9 @@ namespace ClinicaVeterinaria
                 if (profissionalSaude.Id == idProfissionalSelecionado)
                 {
                     profissionalSaude.ReajustarDisponibilidade(periodoSelecionado);
+                    break;
                 }
             }
-
 
             //Escolher animal de estimação:
             Console.WriteLine("\nEscolha o animal de estimação:");
@@ -376,13 +377,13 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o ID do animal: ");
             string stringIdAnimalSelecionado = Console.ReadLine();
             int idAnimalSelecionado;
-            while (!int.TryParse(stringIdAnimalSelecionado, out idAnimalSelecionado))
+            while (!int.TryParse(stringIdAnimalSelecionado, out idAnimalSelecionado) || idAnimalSelecionado > AnimalEstimacao.animaisEstimacao.Count || idAnimalSelecionado <= 0)
             {
                 Console.Write("\nInsira o ID do animal: ");
                 stringIdAnimalSelecionado = Console.ReadLine();
             }
 
-            new Consulta(serviçoSelecionado, idProfissionalSelecionado, idAnimalSelecionado, periodoSelecionado, idClienteSelecionado);
+            Consulta consulta=new Consulta(serviçoSelecionado, idProfissionalSelecionado, idAnimalSelecionado, periodoSelecionado, idClienteSelecionado);
             Console.WriteLine("\nConsulta marcada com sucesso.");
             AguardarPressionarTecla();
         }
@@ -403,7 +404,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o ID do cliente: ");
             string stringIdClienteSelecionado = Console.ReadLine();
             int idClienteSelecionado;
-            while (!int.TryParse(stringIdClienteSelecionado, out idClienteSelecionado))
+            while (!int.TryParse(stringIdClienteSelecionado, out idClienteSelecionado) || idClienteSelecionado > Cliente.clientes.Count || idClienteSelecionado <= 0)
             {
                 Console.Write("\nInsira o ID do cliente: ");
                 stringIdClienteSelecionado = Console.ReadLine();

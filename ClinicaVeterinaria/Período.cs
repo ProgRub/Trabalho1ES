@@ -18,7 +18,7 @@ namespace ClinicaVeterinaria
         public Período(DiaSemana dia, TimeSpan inicio, int duração)
         {
             this._inicio = inicio;
-            this._fim = _inicio + (new TimeSpan((int)(duração / 60), duração % 60, 0));
+            this._fim = new TimeSpan(this._inicio.Hours+(duração / 60), this._inicio.Minutes + (duração % 60), 0);
             this._dia = dia;
         }
 
