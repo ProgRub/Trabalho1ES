@@ -37,6 +37,7 @@ namespace ClinicaVeterinaria
                 input = Console.ReadLine();
             }
             Console.Clear();
+            Console.WriteLine("CLINICA VETERINÁRIA");
             switch (opcao)
             {
                 case 1:
@@ -79,7 +80,7 @@ namespace ClinicaVeterinaria
 
             Console.Write("\nInsira a idade (não pode conter letras): ");
             string auxIdadeAnimal = Console.ReadLine();
-            while (!int.TryParse(auxIdadeAnimal, out idadeAnimal) || idadeAnimal<=0)
+            while (!int.TryParse(auxIdadeAnimal, out idadeAnimal) || idadeAnimal <= 0)
             {
                 Console.Write("\nInsira a idade (não pode conter letras): ");
                 auxIdadeAnimal = Console.ReadLine();
@@ -160,7 +161,7 @@ namespace ClinicaVeterinaria
             string animaisClienteSelecionados = Console.ReadLine();
             string[] stringsIDsAnimais = animaisClienteSelecionados.Split(",");
             int idAExaminar;
-            while (!stringsIDsAnimais.All(id => int.TryParse(id, out idAExaminar) && idAExaminar>0 && idAExaminar <=AnimalEstimacao.animaisEstimacao.Count))
+            while (!stringsIDsAnimais.All(id => int.TryParse(id, out idAExaminar) && idAExaminar > 0 && idAExaminar <= AnimalEstimacao.animaisEstimacao.Count))
             {
                 Console.Write("\nPelo menos um dos valores não é um número positivo ou é um ID que não existe, tente outra vez\nResposta: ");
                 animaisClienteSelecionados = Console.ReadLine();
@@ -168,9 +169,9 @@ namespace ClinicaVeterinaria
             }
             List<int> IDsAnimaisSelecionados = new List<int>();
             List<int> IDsAnimaisRegistados = AnimalEstimacao.animaisEstimacao.Select(animal => animal.ID).ToList();
-            foreach (string  ID in stringsIDsAnimais)
+            foreach (string ID in stringsIDsAnimais)
             {
-                if(IDsAnimaisRegistados.Contains(int.Parse(ID)))
+                if (IDsAnimaisRegistados.Contains(int.Parse(ID)))
                     IDsAnimaisSelecionados.Add(int.Parse(ID));
             }
             new Cliente(contatoCliente, emailCliente, nomeCliente, IDsAnimaisSelecionados);
@@ -197,7 +198,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o preço(euros): ");
             string stringPreço = Console.ReadLine();
             double preço;
-            while (!double.TryParse(stringPreço, out preço) || preço<0)
+            while (!double.TryParse(stringPreço, out preço) || preço < 0)
             {
                 Console.Write("\nInsira o preço(euros): ");
                 stringPreço = Console.ReadLine();
@@ -212,7 +213,7 @@ namespace ClinicaVeterinaria
                 stringDuração = Console.ReadLine();
             }
 
-            new Servico(new TimeSpan((int)(duração/60), duração%60, 0), medicamentos, preço, nome);
+            new Servico(new TimeSpan((int)(duração / 60), duração % 60, 0), medicamentos, preço, nome);
             Console.WriteLine("\nServiço criado com sucesso.");
             AguardarPressionarTecla();
 
@@ -245,7 +246,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nInsira o ID do cliente: ");
             string stringIdClienteSelecionado = Console.ReadLine();
             int idClienteSelecionado;
-            while (!int.TryParse(stringIdClienteSelecionado, out idClienteSelecionado) || idClienteSelecionado>Cliente.clientes.Count || idClienteSelecionado<=0)
+            while (!int.TryParse(stringIdClienteSelecionado, out idClienteSelecionado) || idClienteSelecionado > Cliente.clientes.Count || idClienteSelecionado <= 0)
             {
                 Console.Write("\nInsira o ID do cliente: ");
                 stringIdClienteSelecionado = Console.ReadLine();
@@ -262,14 +263,14 @@ namespace ClinicaVeterinaria
 
             //Escolher serviço:
             Console.WriteLine("\nServiços:");
-            if(Servico.servicos.Count() == 0)
+            if (Servico.servicos.Count() == 0)
             {
                 Console.WriteLine("\nNenhum serviço criado.");
                 AguardarPressionarTecla();
                 return;
             }
 
-            foreach(Servico service in Servico.servicos)
+            foreach (Servico service in Servico.servicos)
             {
                 Console.WriteLine($"{service.Id} - {service.Nome} ({service.Preço} euros)");
             }
@@ -277,7 +278,7 @@ namespace ClinicaVeterinaria
             Console.Write("\nEscolha o tipo de Serviço: ");
             string stringServiçoSelecionado = Console.ReadLine();
             int serviçoSelecionado;
-            while (!int.TryParse(stringServiçoSelecionado, out serviçoSelecionado) || serviçoSelecionado>Servico.servicos.Count|| serviçoSelecionado<=0)
+            while (!int.TryParse(stringServiçoSelecionado, out serviçoSelecionado) || serviçoSelecionado > Servico.servicos.Count || serviçoSelecionado <= 0)
             {
                 Console.Write("\nEscolha o tipo de Serviço: ");
                 stringServiçoSelecionado = Console.ReadLine();
@@ -331,11 +332,11 @@ namespace ClinicaVeterinaria
                 }
 
 
-                periodoSelecionado = new Período(diaSemanaEscolhido, new TimeSpan(horaEscolhida, minutosEscolhidos,0), (int)Servico.servicos[serviçoSelecionado - 1].Duração.TotalMinutes);
+                periodoSelecionado = new Período(diaSemanaEscolhido, new TimeSpan(horaEscolhida, minutosEscolhidos, 0), (int)Servico.servicos[serviçoSelecionado - 1].Duração.TotalMinutes);
 
                 profissionaisDisponiveis = ProfissionalSaude.profissionaisSaude.Where(profissional => profissional.EstaDisponivel(periodoSelecionado)).ToList();
 
-                if(profissionaisDisponiveis.Count() == 0)
+                if (profissionaisDisponiveis.Count() == 0)
                 {
                     Console.WriteLine("\nNão há profissionais de saúde disponíveis nesse horário.");
                 }
@@ -347,23 +348,27 @@ namespace ClinicaVeterinaria
 
             foreach (ProfissionalSaude profissional in profissionaisDisponiveis)
             {
-                Console.WriteLine($"{profissional.Id} - {profissional.Nome}"); 
+                Console.WriteLine($"{profissional.Id} - {profissional.Nome}");
             }
-            Console.Write("\nInsira o ID do profissional de saúde: ");
-            string stringIdProfissional = Console.ReadLine();
-            int idProfissionalSelecionado;
-            while (!int.TryParse(stringIdProfissional, out idProfissionalSelecionado) || idProfissionalSelecionado > ProfissionalSaude.profissionaisSaude.Count || idProfissionalSelecionado <= 0)
+            bool profissionalValido = false;
+            int idProfissionalSelecionado=0;
+            while (!profissionalValido)
             {
                 Console.Write("\nInsira o ID do profissional de saúde: ");
-                stringIdProfissional = Console.ReadLine();
-            }
-
-            foreach (ProfissionalSaude profissionalSaude in profissionaisDisponiveis)
-            {
-                if (profissionalSaude.Id == idProfissionalSelecionado)
+                string stringIdProfissional = Console.ReadLine();
+                while (!int.TryParse(stringIdProfissional, out idProfissionalSelecionado) || idProfissionalSelecionado > ProfissionalSaude.profissionaisSaude.Count || idProfissionalSelecionado <= 0)
                 {
-                    profissionalSaude.ReajustarDisponibilidade(periodoSelecionado);
-                    break;
+                    Console.Write("\nInsira o ID do profissional de saúde: ");
+                    stringIdProfissional = Console.ReadLine();
+                }
+                foreach (ProfissionalSaude profissionalSaude in profissionaisDisponiveis)
+                {
+                    if (profissionalSaude.Id == idProfissionalSelecionado)
+                    {
+                        profissionalSaude.ReajustarDisponibilidade(periodoSelecionado);
+                        profissionalValido = true;
+                        break;
+                    }
                 }
             }
 
@@ -383,7 +388,7 @@ namespace ClinicaVeterinaria
                 stringIdAnimalSelecionado = Console.ReadLine();
             }
 
-            Consulta consulta=new Consulta(serviçoSelecionado, idProfissionalSelecionado, idAnimalSelecionado, periodoSelecionado, idClienteSelecionado);
+            Consulta consulta = new Consulta(serviçoSelecionado, idProfissionalSelecionado, idAnimalSelecionado, periodoSelecionado, idClienteSelecionado);
             Console.WriteLine("\nConsulta marcada com sucesso.");
             AguardarPressionarTecla();
         }
@@ -423,7 +428,7 @@ namespace ClinicaVeterinaria
         {
             Console.WriteLine("Pressione qualquer tecla para continuar.");
             Console.ReadKey();
-            
+
         }
 
 
